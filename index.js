@@ -21,7 +21,7 @@ function Book(title, author, pages, read) {
   this.info = function () {
     return this.title, this.author, this.pages, this.read;
   }
-}
+};
 
 saveButton.addEventListener('click', addBookToLibrary);
 
@@ -29,7 +29,7 @@ function addBookToLibrary() {
   if (titleInput.value === "" || authorInput.value === "" || pagesInput.value === "" || (!readInput.checked && !notReadInput.checked)) {
     alert("Please fill in all the inputs before saving.");
     return;
-  }
+  };
 
   const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, getSelectedRadioValue());
   bookLibrary.push(newBook);
@@ -40,7 +40,7 @@ function addBookToLibrary() {
   pagesInput.value = "";
   readInput.checked = false;
   notReadInput.checked = false;
-}
+};
 
 function getSelectedRadioValue() {
   if (readInput.checked) {
@@ -50,7 +50,7 @@ function getSelectedRadioValue() {
   } else {
     return "";
   }
-}
+};
 
 function showLibraryData() {
   tbody.innerHTML = "";
@@ -67,23 +67,24 @@ function showLibraryData() {
         </tr>
         `;
   }
-}
+};
 
 tbody.addEventListener('click', function (event) {
+  const getIndex = event.target.parentNode.parentNode.rowIndex - 1;
   if (event.target.classList.contains("readButton")) {
     event.target.textContent = "Not Read";
     event.target.classList.replace("readButton", "notReadButton");
-    updateLibraryStatus(event.target.parentNode.parentNode.rowIndex - 1, "Not Read");
+    updateLibraryStatus(getIndex, "Not Read");
   } else if (event.target.classList.contains("notReadButton")) {
     event.target.textContent = "Read";
     event.target.classList.replace("notReadButton", "readButton");
-    updateLibraryStatus(event.target.parentNode.parentNode.rowIndex - 1, "Read");
+    updateLibraryStatus(getIndex, "Read");
   } else if (event.target.classList.contains("remove")) {
-    bookLibrary.splice(event.target.parentNode.parentNode.rowIndex - 1, 1);
+    bookLibrary.splice(getIndex, 1);
     showLibraryData();
   }
 });
 
 function updateLibraryStatus(index, status) {
   bookLibrary[index].read = status;
-}
+};
