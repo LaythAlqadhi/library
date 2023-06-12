@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Library</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+<body>
+  <header>
+    <h1>Book Library</h1>
+    <p>Discover a seamless online library experience where you can save and organize your personal collection of books.</p>
+  </header>
+  <div class="input-section">
+    <form action="/" method="GET">
+      <div class="text-input">
+        <label for="title">Title</label>
+        <input type="text" id="title" required>
+      </div>
+      <div class="text-input">
+        <label for="author">Author</label>
+        <input type="text" id="author" required>
+      </div>
+      <div class="text-input">
+        <label for="pages">Pages</label>
+        <input type="number" id="pages" required>
+      </div>
+      <div class="radio-input">
+        <label for="read">Read</label>
+        <input type="radio" name="readSelection" id="read" value="Read" required>
+        <label for="not-read">Not Read</label>
+        <input type="radio" name="readSelection" id="not-read" value="Not Read" required>
+      </div>
+      <div class="save-button">
+        <button type="submit" id="save-button">Save</button>
+      </div>
+    </form>
+  </div>
+  <div class="output">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Pages</th>
+          <th>Read</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  <script src="index.js"></script>
+</body>
+</html>

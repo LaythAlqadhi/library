@@ -1,0 +1,145 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100hv;
+    width: 100%;
+    font-family: system-ui;
+    background-color: #E5E5E5;
+    color: #14213D;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background-color: #14213D;
+    color: #FCA311;
+}
+
+header h1{
+    text-shadow: 2px 2px 0px black, -2px 2px 0px black;
+}
+
+.input-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.text-input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 7.5px;
+}
+
+.text-input input{
+    background-color: #ffffff;
+    padding: 5px;
+    color: #14213D;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+.radio-input {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 50px;
+    margin: 15px;
+}
+
+.radio-input input{
+    background-color: #ffffff;
+    cursor: pointer;
+}
+
+.input-section label {
+    margin-bottom: 5px;
+}
+
+.text-input input {
+    width: 300px;
+    height: 35px;
+    cursor: pointer;
+}
+
+.save-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+#save-button {
+    border-radius: 25px;
+    background-color: #14213D;
+    color: #FCA311;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+#save-button:active {
+    transform: scale(0.9);
+}
+
+table {
+    width: 100%;
+    margin-bottom: 10px;
+}
+table th {
+    background-color: #14213D;
+    color: #FCA311;
+}
+
+table td {
+    background-color: #ffffff50;
+}
+
+table th, td {
+    text-align: center;
+    padding: 3px;
+}
+
+.readButton {
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.readButton:hover {
+    color: #222;
+}
+
+.notReadButton {
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.notReadButton:hover {
+    color: #222;
+}
+
+.remove {
+    color: darkred;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.remove:hover {
+    color: red;
+}
