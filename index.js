@@ -13,12 +13,14 @@ form.addEventListener('submit', (event) => {
 
 let bookLibrary = [];
 
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-  this.info = function () {
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
+  info() {
     return this.title, this.author, this.pages, this.read;
   }
 };
