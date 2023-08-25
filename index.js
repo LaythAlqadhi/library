@@ -5,9 +5,14 @@ const readInput = document.querySelector("#read");
 const notReadInput = document.querySelector("#not-read");
 const saveButton = document.querySelector("#save-button");
 const form = document.querySelector("form");
+const inputs = document.querySelectorAll("input");
 const tbody = document.querySelector("tbody");
+const error = document.querySelectorAll(".error");
+const titleError = document.querySelector(".title-error");
+const authorError = document.querySelector(".author-error");
+const pagesError = document.querySelector(".pages-error");
 
-form.addEventListener('submit', (event) => {
+form.addEventListener("submit", (event) => {
   event.preventDefault();
 });
 
@@ -23,17 +28,15 @@ class Book {
   info() {
     return this.title, this.author, this.pages, this.read;
   }
-};
-
-saveButton.addEventListener('click', addBookToLibrary);
+}
 
 function addBookToLibrary() {
-  if (titleInput.value === "" || authorInput.value === "" || pagesInput.value === "" || (!readInput.checked && !notReadInput.checked)) {
-    alert("Please fill in all the inputs before saving.");
-    return;
-  };
-
-  const newBook = new Book(titleInput.value, authorInput.value, pagesInput.value, getSelectedRadioValue());
+  const newBook = new Book(
+    titleInput.value,
+    authorInput.value,
+    pagesInput.value,
+    getSelectedRadioValue(),
+  );
   bookLibrary.push(newBook);
   showLibraryData();
 
@@ -42,7 +45,7 @@ function addBookToLibrary() {
   pagesInput.value = "";
   readInput.checked = false;
   notReadInput.checked = false;
-};
+}
 
 function getSelectedRadioValue() {
   if (readInput.checked) {
@@ -52,12 +55,13 @@ function getSelectedRadioValue() {
   } else {
     return "";
   }
-};
+}
 
 function showLibraryData() {
   tbody.innerHTML = "";
   for (let i = 0; i < bookLibrary.length; i++) {
-    let readClass = bookLibrary[i]["read"] === "Read" ? "readButton" : "notReadButton";
+    let readClass =
+      bookLibrary[i]["read"] === "Read" ? "readButton" : "notReadButton";
     tbody.innerHTML += `
         <tr>
           <td>${1 + i}</td>
@@ -69,9 +73,9 @@ function showLibraryData() {
         </tr>
         `;
   }
-};
+}
 
-tbody.addEventListener('click', function (event) {
+tbody.addEventListener("click", function (event) {
   const getIndex = event.target.parentNode.parentNode.rowIndex - 1;
   if (event.target.classList.contains("readButton")) {
     event.target.textContent = "Not Read";
@@ -89,4 +93,65 @@ tbody.addEventListener('click', function (event) {
 
 function updateLibraryStatus(index, status) {
   bookLibrary[index].read = status;
-};
+}
+
+inputs.forEach(input => input.addEventListener('input', function () {
+    if (input.validity.valid) {
+        error.forEach(item => {
+            item.textContent = '';
+            item.classList = 'error';
+        })
+    } else {
+        showError();
+    }
+}))
+
+form.addEventListener('submit', function (e) {
+    const inputsValid = validateInputs();
+    
+    if (!inputsValid) {
+        showError();
+        e.preventDefault();
+    } else {
+        addBookToLibrary();
+    }
+});
+
+function validateInputs() {
+    const validTitle = validateInput(titleInput, titleError);
+    const validAuthor = validateInput(authorInput, authorError);
+    const validPages = validateInput(pagesInput, pagesError);
+
+    const validReadStatus = notReadInput.checked || readInput.checked;
+    
+    return validTitle && validAuthor && validPages && validReadStatus;
+}
+
+function validateInput(input, errorElement) {
+    const validity = input.validity;
+
+    if (validity.valueMissing) {
+        errorElement.textContent = 'Value is missing';
+    } else if (validity.typeMismatch) {
+        errorElement.textContent = 'Value type is not match';
+    } else if (validity.tooLong) {
+        errorElement.textContent = 'Value is too long';
+    } else if (validity.tooShort) {
+        errorElement.textContent = 'Value is too short';
+    } else if (validity.rangeOverflow) {
+        errorElement.textContent = 'Value is over the required range';
+    } else if (validity.rangeUnderflow) {
+        errorElement.textContent = 'Value is under the required range';
+    } else {
+        errorElement.textContent = '';
+        return true;
+    }
+
+    return false;
+}
+
+function showError() {
+    error.forEach(item => {
+        item.className = "error active";
+    })
+}

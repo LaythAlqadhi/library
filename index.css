@@ -120,6 +120,7 @@ table th, td {
 
 .readButton:hover {
     color: #222;
+  z-index: -2;
 }
 
 .notReadButton {
@@ -142,4 +143,33 @@ table th, td {
 
 .remove:hover {
     color: red;
+}
+
+input:invalid {
+  border-color: #900;
+  background-color: #fdd;
+}
+
+input:valid {
+  border-color: #900;
+  background-color: #dfd;
+}
+
+input:focus:invalid {
+  outline: none;
+}
+
+.error {
+  width: 100%;
+  font-size: 80%;
+  color: white;
+  background-color: #900;
+  border-radius: 0 0 5px 5px;
+  box-sizing: border-box;
+}
+
+.title-error.active,
+.author-error.active,
+.pages-error.active {
+  padding: 0.3em;
 }
